@@ -6,7 +6,10 @@ const http = require('http');
 
 const path = require('path');
 
-const port = 8050;
+// const port = 8050;
+
+const port = process.env.PORT || 3000
+
 
 // Use the whole root as static files to be able to serve the html file and
 // the build folder

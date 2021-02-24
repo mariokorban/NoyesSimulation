@@ -26,7 +26,7 @@
       $(document).ready(function() {
         $("#add").click(function() {
           var fieldWrapper = $("<div><label> Level Type: </label>")
-          var type = $("<select class=\"fieldtype\"><option value=\"SmallKLT\">KLT_Small</option><option value=\"MediumKLT\">KLT_Medium</option><option value=\"BigKLT\">KLT_Big</option></select>");
+          var type = $("<select class=\"fieldtype\"><option value=\"SmallKLT\">KLT_Small</option><option value=\"MediumKLT\">KLT_Medium</option><option value=\"BigKLT\">KLT_Big</option><option value=\"FoldableKLT\">KLT_Foldable</option></select>");
           var removeButton = $("<input type=\"button\" class=\"remove\" value=\"-\" />");
           removeButton.click(function() {
              $(this).parent().remove();
