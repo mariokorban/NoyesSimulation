@@ -6,8 +6,6 @@ const http = require('http');
 
 const path = require('path');
 
-// const port = 8050;
-
 const port = process.env.PORT || 3000
 
 
@@ -18,6 +16,11 @@ app.use(express.static(path.join(__dirname, '/')));
 // Send html on '/'path
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, + '/index.html'));
+})
+
+// Send html on '/simulation'path
+app.get('/simulation', (req, res) => {
+    res.sendFile(__dirname+"/simulation.html");
 })
 
 // Create the server and listen on port
