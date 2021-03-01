@@ -3,7 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>Noyes Simulation Login Page</title>
+
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
     <script>
         function validateLogin(){
             var passcode = "@Noyes2021"
@@ -19,12 +30,14 @@
     </script>
 </head>
 <body>
-    <center><img src="logo.png"/></center>
-    <center>
-        <label for="password">Enter Password: </label>
-        <input type="password" name="password" id="password">
-    </center><br>
-    <center><h3 id="error_msg" style="display: none; color: red;">Wrong Password, Try Again!</h3></center>
-    <center><button onclick="validateLogin()">Login</button></center>
+    <div style="height: 100%; width: 100%; margin-top: 15%;"> 
+        <center><img src="logo.png" width="50%"/></center>
+        <center>
+            <label for="password" style="font-size: 20px; margin-right: 2%;">Enter Password:</label>
+            <input type="password" name="password" id="password" style="width: 20%;">
+        </center><br>
+        <center><h3 id="error_msg" style="display: none; color: red;">Wrong Password, Try Again!</h3></center>
+        <center><button onclick="validateLogin()" style="width: 15%; font-weight: bold;">Login to Noyes Simulation</button></center>
+    </div>
 </body>
 </html>

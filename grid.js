@@ -11,7 +11,7 @@ function gridData() {
 		data.push( new Array() );
 		
 		// iterate for cells/columns inside rows
-		for (var column = 0; column < 10; column++) {
+		for (var column = 0; column < 15; column++) {
 			data[row].push({
 				x: xpos,
 				y: ypos,
@@ -34,7 +34,7 @@ var gridData = gridData();
 // I like to log the data to the console for quick debugging
 console.log(gridData);
 
-var grid = d3.select("#grid").append("svg").attr("width","510px").attr("height","510px");
+var grid = d3.select("#grid").append("svg").attr("width","100%").attr("height","510px");
 	
 var row = grid.selectAll(".row")
 	.data(gridData)
@@ -62,6 +62,7 @@ var column = row.selectAll(".square")
 	});
 
 	function generateModule(){
+		console.log("Test Generate Module")
         var types = [];
 		var array = [];
         $("#levelsForm div").each(function() {
@@ -107,7 +108,7 @@ var column = row.selectAll(".square")
 		var counter = 0;
 		var values = [];
 		array.forEach(a => {
-			if(counter < 10){
+			if(counter < 15){
 				values.push(a)
 				counter = counter + 1
 			}
@@ -122,6 +123,16 @@ var column = row.selectAll(".square")
 		console.log(shape);
 
 		var value = lvls+"_"+shape;
+		console.log(value);
 
-        unityInstance.SendMessage("JavascriptHook", "GenerateModule",value);
-      }
+        unityInstance.SendMessage("JavascriptHook", "GenerateModule", value);
+	  }
+	  
+	  function reload(){
+		unityInstance.SendMessage("JavascriptHook", "clearReload");
+	  }
+
+	  function toogleCover(){
+		unityInstance.SendMessage("JavascriptHook", "ToogleCover");
+	  }
+
