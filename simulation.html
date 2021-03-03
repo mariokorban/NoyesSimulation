@@ -21,20 +21,50 @@
     <!-- <script type="text/javascript" src="node_modules/d3/dist/d3.js"></script> -->
 
     <script>
+      var counter_check = 1;
+
+      // function valueChanged(checkbox){
+      //   console.log("In Value Changed");
+      //   console.log($(this));
+      // }
+
+    function boxCheck(){
+        $(":checkbox").change(
+          function(){
+            if(this.checked){
+              var id = this.id.split("level");
+              console.log(id[1]);
+              $("#grid"+id[1]+" svg").attr("display","block");
+              $("#grid"+id[1]+" label").css("display","block");
+            }
+            else{
+              var id = this.id.split("level");
+              console.log(id[1]);
+              $("#grid"+id[1]+" svg").attr("display","none");
+              $("#grid"+id[1]+" label").css("display","none");
+            }
+          }
+        )
+      }
+
+
+
       function addLevel(){
-          var fieldWrapper = $("<br><div><label> Level Type: </label>")
-          var type = $("<select class=\"fieldtype\"><option value=\"SmallKLT\">KLT_Small</option><option value=\"MediumKLT\">KLT_Medium</option><option value=\"BigKLT\">KLT_Big</option><option value=\"FoldableKLT\">KLT_Foldable</option></select>");
-          var removeButton = $("<input type=\"button\" class=\"remove\" value=\"-\" />");
-          removeButton.click(function() {
-             $(this).parent().remove();
-          });
-          fieldWrapper.append(type);
-          fieldWrapper.append(removeButton);
+          var fieldWrapper = $("<br><div><input type=\"checkbox\" class=\"levelCheckBox\" id=\"level"+counter_check+"\" name=\"level"+counter_check+"\" value=\"Level Type:\" onclick=\"boxCheck()\">")
+          var lab = $("<label>   Level Type :   </label>");
+          var type = $("<select class=\"fieldtype\"><option value=\"SmallKLT\">KLT_Small</option><option value=\"MediumKLT\">KLT_Medium</option><option value=\"BigKLT\">KLT_Big</option><option value=\"FoldableKLT\">KLT_Foldable</option></select></div>");
+          // var removeButton = $("<input type=\"button\" class=\"remove\" value=\"-\" />");
+          // var grid_label = $("<label> Level "+counter_check+" :</label>")
+          var grid = $("<div id=\"grid"+counter_check+"\"><br><label> Level "+counter_check+" :</label></div>");
           $("#levelsForm").append(fieldWrapper);
+          fieldWrapper.append(lab);
+          fieldWrapper.append(type);
+          $("#grid_holder").append(grid);
+          counter_check += 1;
+          beginGrid();
       }
 
       var unityInstance =  UnityLoader.instantiate("unityContainer", "Build/Noyes.json");
-
     </script>
 
   </head>
@@ -49,6 +79,7 @@
       
             <div>
               <label style="color: red;">Starting From Bottom to Top.</label><br>
+              <div><input type="checkbox" checked class="levelCheckBox" id="level0" name="level0" value="Level Type:" onclick="boxCheck()">
               <label> Level Type: </label><span>
               <select class="fieldtype">
                 <option value="SmallKLT">KLT_Small</option>
@@ -70,31 +101,31 @@
 
     <div class="col-md-9" style="margin-top: 25px;">
       <div class="row">
-        <div class="col-md-8">
-          <div id="grid"></div>
+        <div class="col-md-8" id="grid_holder">
+          <div id="grid0"></div>
           <script src="grid.js" type="text/javascript"></script>
         </div>
         <div class="col-md-4">
           <h3></h3><br><br>
 
             <div class="row" style="display: table;">
-              <div style="display: inline-block; vertical-align: middle; width: 50px; height: 50px; border-color: black;background-color: rgb(245, 108, 78);;"></div><br><br><br>
-                <h3 style="display: table-cell; vertical-align: top; padding: 10px; margin-bottom: 10px;">Source Trolley to Deliver</h3>              
+              <div style="display: inline-block; vertical-align: middle; width: 80px; height: 30px; border-color: black;background-color: rgb(245, 108, 78);;"></div><br><br><br>
+                <h3 style="display: table-cell; vertical-align: top; padding: 10px; margin-bottom: 15px;">Source Trolley to Deliver</h3>              
             </div>
 
             <div class="row" style="display: table;">
-              <div style="display: inline-block; vertical-align: middle; width: 50px; height: 50px; border-color: black;background-color:rgb(131, 134, 144);"></div><br><br><br>
-              <h3 style="display: table-cell; vertical-align: top; padding: 10px; margin-bottom: 10px;">Empty Space</h3>              
+              <div style="display: inline-block; vertical-align: middle; width: 80px; height: 30px; border-color: black;background-color:rgb(131, 134, 144);"></div><br><br><br>
+              <h3 style="display: table-cell; vertical-align: top; padding: 10px; margin-bottom: 15px;">Empty Space</h3>              
             </div>
 
             <div class="row" style="display: table;">
-              <div style="display: inline-block; vertical-align: middle; width: 50px; height: 50px; border-color: black;background-color: rgb(0, 255, 0);"></div><br><br><br>
-              <h3 style="display: table-cell; vertical-align:top; padding: 10px; margin-bottom: 10px;">Balcony</h3>              
+              <div style="display: inline-block; vertical-align: middle; width: 80px; height: 30px; border-color: black;background-color: rgb(0, 255, 0);"></div><br><br><br>
+              <h3 style="display: table-cell; vertical-align:top; padding: 10px; margin-bottom: 15px;">Balcony</h3>              
             </div>
 
             <div class="row" style="display: table;">
-              <div style="display: inline-block; vertical-align: middle; width: 50px; height: 50px; border-color: black;background-color: rgb(44, 147, 232);"></div><br><br><br>
-              <h3 style="display: table-cell; vertical-align: top; padding: 10px; margin-bottom: 10px;">Trolley</h3>              
+              <div style="display: inline-block; vertical-align: top; width: 80px; height: 30px; border-color: black;background-color: rgb(44, 147, 232);"></div><br><br><br>
+              <h3 style="display: table-cell; vertical-align: top; padding: 10px; margin-bottom: 15px;">Trolley</h3>         
             </div>
 
         </div>
