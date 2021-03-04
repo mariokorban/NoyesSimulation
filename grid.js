@@ -51,7 +51,11 @@ function drawGrids(){
 		var gridData = grids[g];
 		console.log(gridData);
 		
-		document.getElementById("grid"+g).innerHTML = "";
+		if (document.getElementById("grid"+g).getElementsByTagName('svg').length) {
+			console.log('test1 has svg');
+		}
+		else{
+			document.getElementById("grid"+g).innerHTML = "";
 		document.getElementById("grid"+g).innerHTML = "<label>Level "+g+" : </label>"
 
 		var grid = d3.select("#grid"+g).append("svg").attr("width","100%").attr("height","510px");
@@ -87,6 +91,7 @@ function drawGrids(){
 		   if ((d.click)%5 == 3 ) { d3.select(this).style("fill","#838690").attr("id","c3"); }
 		   if ((d.click)%5 == 4 ) { d3.select(this).style("fill","#0f0").attr("id","c4"); }
 		});
+		}
 	}
 }
 
