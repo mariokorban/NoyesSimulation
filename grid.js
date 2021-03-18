@@ -1,6 +1,5 @@
 beginGrid();
 
-
 function genGridData() {
 	var data = new Array();
 	var xpos = 1; //starting xpos and ypos at 1 so the stroke will show when we make the grid below
@@ -10,11 +9,11 @@ function genGridData() {
 	var click = 0;
 	
 	// iterate for rows	
-	for (var row = 0; row < 15; row++) {
+	for (var row = 0; row < 50; row++) {
 		data.push( new Array() );
 		
 		// iterate for cells/columns inside rows
-		for (var column = 0; column < 10; column++) {
+		for (var column = 0; column < 50; column++) {
 			data[row].push({
 				x: xpos,
 				y: ypos,
@@ -34,6 +33,68 @@ function genGridData() {
 }
 
 var grids = new Array();
+
+var copiedPattern = new Array();
+
+function copyPattern(grid){
+	copiedPattern = [];
+	$("#"+grid+" svg .row rect").each(function(){
+		if($(this).attr("id") == "c0"){
+			copiedPattern.push(5)
+		}
+		else if($(this).attr("id") == "c1"){
+			copiedPattern.push(1)
+		}
+		else if($(this).attr("id") == "c2"){
+			copiedPattern.push(2)
+		}
+		else if($(this).attr("id") == "c3"){
+			copiedPattern.push(0)
+		}
+		else if($(this).attr("id") == "c4"){
+			copiedPattern.push(3)
+		}
+	})
+	console.log(copiedPattern);
+}
+
+function pastePattern(grid){
+	var counter = 0;
+	$("#"+grid+" svg .row rect").each(function(){
+		if(copiedPattern[counter] == 5){
+			$(this).attr("id","c0");
+			$(this).css("fill","#fff");
+			counter+= 1;
+		}
+		else if(copiedPattern[counter] == 1){
+			$(this).attr("id","c1");
+			$(this).css("fill","#2C93E8");
+			counter += 1;
+		}
+		else if(copiedPattern[counter] == 2){
+			$(this).attr("id","c2");
+			$(this).css("fill","#F56C4E");
+			counter += 1;
+		}
+		else if(copiedPattern[counter] == 0){
+			$(this).attr("id","c3");
+			$(this).css("fill","#838690");
+			counter += 1;
+		}
+		else if(copiedPattern[counter] == 3){
+			$(this).attr("id","c4");
+			$(this).css("fill","#0f0");
+			counter += 1;
+		}
+	})
+}
+
+function clearGrid(grid){
+	$("#"+grid+" svg .row rect").each(function(){
+		$(this).attr("id","c0");
+		$(this).css("fill","#fff");
+	})
+}
 
 function beginGrid(){
 	grids = [];
@@ -57,9 +118,9 @@ function drawGrids(){
 		}
 		else{
 			document.getElementById("grid"+g).innerHTML = "";
-		document.getElementById("grid"+g).innerHTML = "<label>Level "+g+" : </label>"
+		document.getElementById("grid"+g).innerHTML = "<label>Level "+g+" : </label><button style=\"float:right\" onclick=\"clearGrid('grid"+g+"')\">Clear</button><button style=\"float:right\" onclick=\"pastePattern('grid"+g+"')\">Paste</button><button style=\"float:right\" onclick=\"copyPattern('grid"+g+"')\">Copy</button>"
 
-		var grid = d3.select("#grid"+g).append("svg").attr("width","100%").attr("height","510px");
+		var grid = d3.select("#grid"+g).append("svg").attr("width","300%").attr("height","200%");
 		var id = "grid"+g
 		if(id == "grid0"){
 		}
@@ -96,8 +157,6 @@ function drawGrids(){
 	}
 }
 
-// I like to log the data to the console for quick debugging
-
 	function generateModule(){
 
 		reload();
@@ -113,7 +172,13 @@ function drawGrids(){
 		});
 		var lvls = [];
 		console.log(types);
-		for(var t=0;t<grids.length;t++){
+
+		var grid_length = 0;
+		$("svg").each(function(){
+			grid_length += 1;
+		})
+
+		for(var t=0;t<grid_length;t++){
 			lvls.push(types[t+1])
 		}
 
@@ -121,8 +186,8 @@ function drawGrids(){
 		
 		console.log(levels_all);
         // var bots = document.getElementById("bots").value;
-		
-		for(var c = 0; c < grids.length; c++){
+
+		for(var c = 0; c < grid_length; c++){
 
 			var array = [];
 			var rowCount = 0;
@@ -161,7 +226,7 @@ function drawGrids(){
 			var counter = 0;
 			var values = [];
 			array.forEach(a => {
-				if(counter < 10){
+				if(counter < 50){
 					values.push(a)
 					counter = counter + 1
 				}
@@ -183,7 +248,8 @@ function drawGrids(){
 		var value = levels_all+"_"+lvl_vals;
 		console.log(value);
 
-        unityInstance.SendMessage("JavascriptHook", "GenerateModule", value);
+		unityInstance.SendMessage("JavascriptHook", "GenerateModule", value);
+		unityInstance.SendMessage("JavascriptHook", "uploadBOQ");
 	  }
 	  
 	  function reload(){
@@ -193,4 +259,3 @@ function drawGrids(){
 	  function toogleCover(){
 		unityInstance.SendMessage("JavascriptHook", "ToogleCover");
 	  }
-

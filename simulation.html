@@ -34,12 +34,14 @@
             if(this.checked){
               var id = this.id.split("level");
               console.log(id[1]);
+              $("#grid"+id[1]).css("display","block");
               $("#grid"+id[1]+" svg").attr("display","block");
               $("#grid"+id[1]+" label").css("display","block");
             }
             else{
               var id = this.id.split("level");
               console.log(id[1]);
+              $("#grid"+id[1]).css("display","none");
               $("#grid"+id[1]+" svg").attr("display","none");
               $("#grid"+id[1]+" label").css("display","none");
             }
@@ -55,7 +57,7 @@
           var type = $("<select class=\"fieldtype\"><option value=\"SmallKLT\">KLT_Small</option><option value=\"MediumKLT\">KLT_Medium</option><option value=\"BigKLT\">KLT_Big</option><option value=\"FoldableKLT\">KLT_Foldable</option></select></div>");
           // var removeButton = $("<input type=\"button\" class=\"remove\" value=\"-\" />");
           // var grid_label = $("<label> Level "+counter_check+" :</label>")
-          var grid = $("<div id=\"grid"+counter_check+"\"><br><label> Level "+counter_check+" :</label></div>");
+          var grid = $("<div id=\"grid"+counter_check+"\"style=\"overflow: scroll;display: none;height: 510px\"><br><label> Level "+counter_check+" :</label></div>");
           $("#levelsForm").append(fieldWrapper);
           fieldWrapper.append(lab);
           fieldWrapper.append(type);
@@ -91,18 +93,21 @@
       
           </fieldset>
       
-          <input type="button" value="Add Level" class="add" id="add" onclick="addLevel()"></input>  <br><br>
+          <input type="button" value="Add Level" style="color:black;" class="add" id="add" onclick="addLevel()"></input>  <br><br>
 
-          <input type="button" value="Generate Module" onclick="generateModule()">
-          <input type="button" value="Reload" onclick="reload()">
-          <input type="button" value="Toggle Cover" onclick="toogleCover()">
+          <input type="button" value="Generate Module" style="color:black;" onclick="generateModule()">
+          <input type="button" value="Reload" style="color:black;" onclick="reload()">
+          <input type="button" value="Toggle Cover" style="color:black;" onclick="toogleCover()">
+          <a href='/Bill Of Quantity.csv' download='Bill Of Quantity.csv' id='download-link' style="color:black;">
+            <input type="button" value="Export BOQ">
+          </a>
         </div>
     </div>
 
     <div class="col-md-9" style="margin-top: 25px;">
       <div class="row">
         <div class="col-md-8" id="grid_holder">
-          <div id="grid0"></div>
+          <div id="grid0" style="overflow: scroll; height: 510px;"></div>
           <script src="grid.js" type="text/javascript"></script>
         </div>
         <div class="col-md-4">
@@ -110,7 +115,7 @@
 
             <div class="row" style="display: table;">
               <div style="display: inline-block; vertical-align: middle; width: 80px; height: 30px; border-color: black;background-color: rgb(245, 108, 78);;"></div><br><br><br>
-                <h3 style="display: table-cell; vertical-align: top; padding: 10px; margin-bottom: 15px;">Source Trolley to Deliver</h3>              
+                <h3 style="display: table-cell; vertical-align: top; padding: 10px; margin-bottom: 15px;">Source Carrier to Deliver</h3>              
             </div>
 
             <div class="row" style="display: table;">
@@ -125,7 +130,7 @@
 
             <div class="row" style="display: table;">
               <div style="display: inline-block; vertical-align: top; width: 80px; height: 30px; border-color: black;background-color: rgb(44, 147, 232);"></div><br><br><br>
-              <h3 style="display: table-cell; vertical-align: top; padding: 10px; margin-bottom: 15px;">Trolley</h3>         
+              <h3 style="display: table-cell; vertical-align: top; padding: 10px; margin-bottom: 15px;">Carrier</h3>         
             </div>
 
         </div>
