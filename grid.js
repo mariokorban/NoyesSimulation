@@ -109,16 +109,17 @@ function clearGrids(){
 }
 
 function drawGrids(){
+
 	for(var g = 0; g < grids.length; g++){
 		var gridData = grids[g];
 		console.log(gridData);
-		
+		copyPattern("grid0");
 		if (document.getElementById("grid"+g).getElementsByTagName('svg').length) {
 			console.log('test1 has svg');
 		}
 		else{
 			document.getElementById("grid"+g).innerHTML = "";
-		document.getElementById("grid"+g).innerHTML = "<label>Level "+g+" : </label><button style=\"float:right\" onclick=\"clearGrid('grid"+g+"')\">Clear</button><button style=\"float:right\" onclick=\"pastePattern('grid"+g+"')\">Paste</button><button style=\"float:right\" onclick=\"copyPattern('grid"+g+"')\">Copy</button>"
+			document.getElementById("grid"+g).innerHTML = "<label>Level "+g+" : </label><button style=\"float:right\" onclick=\"clearGrid('grid"+g+"')\">Clear</button><button style=\"float:right\" onclick=\"pastePattern('grid"+g+"')\">Paste</button><button style=\"float:right\" onclick=\"copyPattern('grid"+g+"')\">Copy</button>"
 
 		var grid = d3.select("#grid"+g).append("svg").attr("width","300%").attr("height","200%");
 		var id = "grid"+g
@@ -154,6 +155,7 @@ function drawGrids(){
 		   if ((d.click)%5 == 4 ) { d3.select(this).style("fill","#0f0").attr("id","c4"); }
 		});
 		}
+		pastePattern(id);
 	}
 }
 
